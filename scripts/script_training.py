@@ -6,8 +6,7 @@ from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 
 from model.model_task1 import SampleCNN
-from model.model3 import Net
- 
+from model.model_SimpleNet import SimpleNet
 
 from train.train import train_loop, test_loop
 
@@ -40,14 +39,14 @@ if __name__ == "__main__":
     train_dataloader = DataLoader(dataset, batch_size=parameters['batch_size'])
 
     # Essential for TensorBoard Tool 
-    writer = SummaryWriter(f"runs/model7 == batch_size = {parameters['batch_size']}, batch_size = {parameters['batch_size']}, lr = {parameters['lr']}")
+    writer = SummaryWriter(f"runs/model8 == batch_size = {parameters['batch_size']}, batch_size = {parameters['batch_size']}, lr = {parameters['lr']}")
     
-    
+    """
     #save model parameters
     with open(f"model_N7_params.pkl", "wb") as file:
         pickle.dump(parameters, file)
 
-    # The Swin Transformer Model
+    
     model = SampleCNN(
         num_classes=parameters['num_classes'], 
         channels=parameters['channels'],
@@ -56,7 +55,9 @@ if __name__ == "__main__":
         fc_features=parameters['fc_features'])
     
     model = model.to(dtype = dtype, device= device)
+    """
     
+    model = SimpleNet(num_classes=10).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=parameters['lr'])
     criterion = nn.CrossEntropyLoss()
     
@@ -71,7 +72,7 @@ if __name__ == "__main__":
     
 
     #save the model weights
-    torch.save(model.state_dict(), f"model_N7.pt")
+    torch.save(model.state_dict(), f"model_N8.pt")
     
     print('Done')
     

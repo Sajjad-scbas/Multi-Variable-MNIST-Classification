@@ -25,9 +25,9 @@ def simple_layer_w_pool(c_in, c_out, kernel, pool_kernel):
         nn.Dropout2d(p=0.1))
 
 
-class SampleCNN(nn.Module):
-    def __init__(self, num_classes : int, channels : Sequence[int], kernels : Sequence[int], strides : Sequence[int], fc_features : int):
-        super(SampleCNN, self).__init__()
+class SimpleNet(nn.Module):
+    def __init__(self, num_classes):
+        super(SimpleNet, self).__init__()
         
                
         self.conv1 = simple_layer(1, 32, 3)
@@ -75,7 +75,7 @@ class SampleCNN(nn.Module):
         out = self.fc1(out)
         out = self.fc2(out)
         
-        return x
+        return out
     
     
     
@@ -88,7 +88,7 @@ if __name__ == "__main__":
     strides = [1, 1, 1, 1]
     fc_features = 128
     
-    model = SampleCNN(num_classes, channels, kernels, strides, fc_features)
+    model = SimpleNet(num_classes, channels, kernels, strides, fc_features)
     x = model(torch.randn(2, 1, 28, 28))
     print('Done')
     
