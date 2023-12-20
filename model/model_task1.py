@@ -18,13 +18,13 @@ class SampleCNN(nn.Module):
                 stride=strides[i],
                 padding=1
             )
-            for i in range(4)
+            for i in range(5)
         ])
-        
+                
         
         self.relus = nn.ModuleList([
             nn.ReLU()
-            for _ in range(5)
+            for _ in range(6)
         ])
         
         self.maxpools = nn.ModuleList([
@@ -32,9 +32,8 @@ class SampleCNN(nn.Module):
                 kernel_size=2, 
                 stride=2
             )
-            for _ in range(4)
+            for _ in range(5)
         ])
-
 
         self.flatten = nn.Flatten()
         
@@ -43,10 +42,11 @@ class SampleCNN(nn.Module):
     
     
     def forward(self, x):
-        for i in range(4):
+        for i in range(5):
             x = self.convs[i](x)
             x = self.relus[i](x)
-            x = self.maxpools[i](x)
+            if i != 0 :
+                x = self.maxpools[i](x)
         
         x = self.flatten(x)
         x = self.fc1(x)
@@ -55,19 +55,18 @@ class SampleCNN(nn.Module):
         
         return x
     
-    
-    
 
+    
 if __name__ == "__main__":
     # Parameters 
     num_classes = 10 
     channels = [1, 8, 16, 32, 64]
-    kernels = [3, 3, 3, 3]
-    strides = [1, 1, 1, 1]
+    kernels = [3, 3, 3, 3, 3]
+    strides = [1, 1, 1, 1, 1]
     fc_features = 128
     
     model = SampleCNN(num_classes, channels, kernels, strides, fc_features)
-    x = model(torch.randn(2, 1, 28, 28))
+    x = model(torch.randn(3, 1, 28, 28))
     print('Done')
     
 
