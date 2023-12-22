@@ -1,0 +1,3 @@
+As part of the recruitment process with an AI company, I had the opportunity to undertake a Computer Vision (CV) challenge! They curated variations of the classic MNIST dataset to assess your skills in computer vision and software engineering.
+
+My mission is to build a CV model capable of identifying and classifying multiple digits within a single image. Unlike the typical MNIST setup with a single digit per image, my dataset introduces a twist. Now, images can feature multiple digits arranged randomly, replicating challenges found in real-world scenarios like license plate recognition and document analysis.
